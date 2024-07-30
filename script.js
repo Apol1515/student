@@ -176,5 +176,3 @@ violationChart.render();
 // Update the total violations display
 updateTotalViolations(totalViolations);
 
-
-

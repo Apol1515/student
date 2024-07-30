@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chatbot</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #fcfcfc, #ba0000);
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .chat-container {
+            width: 90%;
+            max-width: 1000px;
+            height: 70%;
+            max-height: 800px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .chat-box {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ccc;
+        }
+        .input-box {
+            display: flex;
+            padding: 10px;
+            background-color: #fafafa;
+        }
+        .input-box input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .input-box button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #009e3a;
+            color: #fff;
+            cursor: pointer;
+        }
+        .home-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #0015ff;
+            color: #fff;
+            cursor: pointer;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        .message.bot {
+            text-align: left;
+        }
+        .message.user {
+            text-align: right;
+        }
+        .message .text {
+            display: inline-block;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #e0e0e0;
+        }
+        .message.bot .text {
+            background-color: #00ac45;
+            color: #fff;
+        }
+      
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>Handy</h1>
+      </div>
+    <button class="home-button" onclick="goHome()">Go to Home</button>
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box"></div>
+        <div class="input-box">
+            <input type="text" id="user-input" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+
+        function sendMessage() {
+            const userInput = document.getElementById('user-input');
+            const chatBox = document.getElementById('chat-box');
+            
+            if (userInput.value.trim() === '') return;
+
+            // Display user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user';
+            userMessage.innerHTML = `<div class="text">${userInput.value}</div>`;
+            chatBox.appendChild(userMessage);
+
+            // Scroll to the bottom
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // Simulate bot response
+            setTimeout(() => {
+                const botMessage = document.createElement('div');
+                botMessage.className = 'message bot';
+                botMessage.innerHTML = `<div class="text">You said: ${userInput.value}</div>`;
+                chatBox.appendChild(botMessage);
+
+                // Scroll to the bottom
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 1000);
+
+            // Clear input
+            userInput.value = '';
+        }
+    </script>
+</body>
+</html>
